@@ -49,7 +49,7 @@ class K_means():
         for k in range(len(centroids)):
             points = np.array(clusters[str(k + 1)])
             plt.scatter(points[:, 0], points[:, 1], c=colors[k])
-            plt.show()
+        plt.show()
 
 
 # Create test data (normal and uniform)
@@ -61,7 +61,7 @@ def generate_uniform(N):
     return (np.random.uniform(-1.5, 1.5, N), np.random.uniform(-1.5, 1.5, N))
 
 
-if __name__ == "__main":
+if __name__ == "__main__":
     # create dummy data
     N = 500
     data = np.concatenate((generate_points(N), generate_points(N)), axis=1)
@@ -76,4 +76,3 @@ if __name__ == "__main":
     clusters, centroids = K.kmeans()
 
     K.show_points(clusters, centroids)
-    print("hi")
