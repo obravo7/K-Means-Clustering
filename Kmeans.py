@@ -63,8 +63,8 @@ def generate_uniform(N):
 
 if __name__ == "__main__":
     # create dummy data
-    N = 500
-    data = np.concatenate((generate_points(N), generate_points(N)), axis=1)
+    N = 1000
+    data = np.concatenate((generate_uniform(N), generate_uniform(N)), axis=1)
     data = data.T
 
     # display data
@@ -72,7 +72,8 @@ if __name__ == "__main__":
     plt.show()
 
     # display results of k-means
-    K = K_means(data, 3)
+    n_clusters = 4
+    K = K_means(data=data, n_clusters=n_clusters)
     clusters, centroids = K.kmeans()
 
     K.show_points(clusters, centroids)
