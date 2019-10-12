@@ -12,15 +12,15 @@ class K_means():
         data = self.data
         k = self.n_clusters
         iterations = self.iterations
-        cluster_assignments = self.assign_cluster(k)
-        clusters = self.random_clusters(k)
+        cluster_assignments = K_means.assign_cluster(k)
+        clusters = K_means.random_clusters(k)
 
         while iterations != 0:
             for j in range(k):
                 cluster_assignments[str(j + 1)] = []
 
             for i in range(len(data)):
-                curr_distance = self.euclidean_distance(data[i], clusters)
+                curr_distance = K_means.euclidean_distance(data[i], clusters)
                 cluster = np.argmin(curr_distance) + 1
                 cluster_assignments[str(cluster)].append(data[i])
                 
@@ -32,13 +32,16 @@ class K_means():
 
         return cluster_assignments, clusters
 
-    def euclidean_distance(self, point, center, axis=1):
+    @classmethod
+    def euclidean_distance(cls, point, center, axis=1):
         return np.linalg.norm(point - center, axis=axis)
 
-    def assign_cluster(self, k):
+    @staticmethod
+    def assign_cluster(k):
         return {str(i): [] for i in range(1, k+1)}
 
-    def random_clusters(self, c):
+    @staticmethod
+    def random_clusters(c):
         return np.random.randn(c, 2)
 
     def show_points(self, clusters, centroids):
@@ -46,7 +49,8 @@ class K_means():
         for k in range(len(centroids)):
             points = np.array(clusters[str(k + 1)])
             plt.scatter(points[:, 0], points[:, 1], c=colors[k])
-            plt.show
+            plt.show()
+
 
 # Create test data (normal and uniform)
 def generate_points(N, mu = 0, sigma = 2.5):
@@ -56,15 +60,20 @@ def generate_points(N, mu = 0, sigma = 2.5):
 def generate_uniform(N):
     return (np.random.uniform(-1.5, 1.5, N), np.random.uniform(-1.5, 1.5, N))
 
-N = 250
-pt = generate_points(N)
-pt2 = generate_points(N)
-c = np.concatenate((pt, pt2), axis=1)
-data = c.T
-plt.scatter(data[:, 0], data[:, 1])
-plt.show()
 
-k = 3
-K = K_means(data, 3)
-clusters, centroids = K.kmeans()
-K.show_points(clusters, centroids)
+if __name__ == "__main":
+    # create dummy data
+    N = 500
+    data = np.concatenate((generate_points(N), generate_points(N)), axis=1)
+    data = data.T
+
+    # display data
+    plt.scatter(data[:, 0], data[:, 1])
+    plt.show()
+
+    # display results of k-means
+    K = K_means(data, 3)
+    clusters, centroids = K.kmeans()
+
+    K.show_points(clusters, centroids)
+    print("hi")
