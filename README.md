@@ -95,5 +95,4 @@ Test visualization using L2-Norm
 
 #### Evaluation
 
-Unfortunately I ran out of time. I apologize in advance. I realized at the end that I should have included an evaluation metric
-from ghe beginning, such as Recall, Precession, F-Score, and/or Percentage of Variance Explained (PVE). 
+TODO: Add evaluation metrics such as Recall, Precession, F-Score, and/or Percentage of Variance Explained (PVE). 
